@@ -1,9 +1,8 @@
 object Version {
 
-    object Android{
-        const val gradle = "7.4.0"
-        const val kotlin = "1.8.10"
-    }
+    const val gradle = "7.4.0"
+    const val kotlin = "1.8.10"
+    const val gson = "2.10"
 
     object AndroidX {
         const val core = "1.10.0"
@@ -30,6 +29,12 @@ object Version {
 }
 
 object Depends {
+
+    const val gson = "com.google.code.gson:gson:${Version.gson}"
+    object Kotlin {
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
+    }
+
     object AndroidX {
         const val core = "androidx.core:core-ktx:${Version.AndroidX.core}"
         const val appCompat = "androidx.appcompat:appcompat:${Version.AndroidX.appCompat}"
@@ -44,6 +49,12 @@ object Depends {
             const val ui = "androidx.compose.ui:ui:${Version.AndroidX.Componse.ui}"
             const val uiPreview =
                 "androidx.compose.ui:ui-tooling-preview:${Version.AndroidX.Componse.ui}"
+            const val uiTooling =
+                "androidx.compose.ui:ui-tooling:${Version.AndroidX.Componse.ui}"
+            const val uiTest =
+                "androidx.compose.ui:ui-test-manifest:${Version.AndroidX.Componse.ui}"
+            const val uiJunit =
+                "androidx.compose.ui:ui-test-junit4:${Version.AndroidX.Componse.ui}"
             const val material3 =
                 "androidx.compose.material3:material3:${Version.AndroidX.Componse.material3}"
             const val navigation =
@@ -53,6 +64,7 @@ object Depends {
 
     object Dagger {
         const val hilt = "com.google.dagger:hilt-android:${Version.Dagger.hilt}"
+        const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.Dagger.hilt}"
     }
 
@@ -78,17 +90,17 @@ object AndroidConfig {
 object BuildConfigField {
 
     object Develop {
-        const val domain = "\"https://api.binance.com/\""
+        const val domain = "\"https://cafenomad.tw\""
         const val timeout = "${30 * 1000L}L"
     }
 
     object Stage {
-        const val domain = "\"https://api1.binance.com/\""
+        const val domain = "\"https://cafenomad.tw\""
         const val timeout = "${30 * 1000L}L"
     }
 
     object Prod {
-        const val domain = "\"https://api2.binance.com/\""
+        const val domain = "\"https://cafenomad.tw\""
         const val timeout = "${15 * 1000L}L"
     }
 }

@@ -85,6 +85,7 @@ android {
 }
 
 dependencies {
+    implementation(Depends.gson)
     implementation(Depends.AndroidX.core)
     implementation(Depends.AndroidX.appCompat)
     implementation(Depends.AndroidX.lifecycleRuntime)
@@ -95,11 +96,17 @@ dependencies {
     implementation(Depends.AndroidX.Componse.material3)
     implementation(Depends.AndroidX.Componse.navigation)
     implementation(Depends.Dagger.hilt)
-    implementation(Depends.Dagger.hiltCompiler)
+    kapt(Depends.Dagger.hiltCompiler)
+    implementation(Depends.Dagger.hiltNavigationCompose)
+    implementation(Depends.Kotlin.reflect)
     implementation(Depends.Squareup.okHttp)
     implementation(Depends.Squareup.okHttpLogger)
     implementation(Depends.Squareup.retrofit)
+    debugImplementation(Depends.AndroidX.Componse.uiTest)
+    debugImplementation(Depends.AndroidX.Componse.uiTooling)
     debugImplementation(Depends.Squareup.leakCanary)
+    androidTestImplementation(Depends.AndroidX.Componse.uiJunit)
+
 }
 
 kapt {
