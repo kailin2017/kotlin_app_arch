@@ -9,6 +9,7 @@ object Version {
         const val appCompat = "1.5.1"
         const val navigation = "2.5.3"
         const val lifecycle = "2.6.1"
+        const val room = "2.5.1"
 
         object Componse {
             const val activity = "1.7.0"
@@ -59,6 +60,13 @@ object Depends {
                 "androidx.compose.material3:material3:${Version.AndroidX.Componse.material3}"
             const val navigation =
                 "androidx.navigation:navigation-compose:${Version.AndroidX.navigation}"
+        }
+
+        object Room{
+            const val runtime ="androidx.room:room-runtime:${Version.AndroidX.room}"
+            const val ktx ="androidx.room:room-ktx:${Version.AndroidX.room}"
+            const val compiler ="androidx.room:room-compiler:${Version.AndroidX.room}"
+            const val testing ="androidx.room:room-testing:${Version.AndroidX.room}"
         }
     }
 

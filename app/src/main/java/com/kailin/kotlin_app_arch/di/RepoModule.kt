@@ -9,7 +9,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class ViewModelModule {
+abstract class RepoModule {
 
     @Binds
     abstract fun provideCafeRepo(repository: CafeRepoImpl): CafeRepo

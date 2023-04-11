@@ -1,5 +1,11 @@
 package com.kailin.kotlin_app_arch.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
+
 /***
  * @param id 一組UUID
  * @param name 店名
@@ -13,15 +19,16 @@ package com.kailin.kotlin_app_arch.model
  * @param latitude 緯度
  * @param longitude 經度
  * @param url 官網
- * @param limited_time 有無限時
+ * @param limitedTime 有無限時
  * @param socket 插座多
- * @param standing_desk 可站立工作
+ * @param standingDesk 可站立工作
  * @param city 城市
  * @param mrt 捷運站
- * @param open_time 營業時間
+ * @param openTime 營業時間
  */
+@Entity
 data class CafeNomad(
-    val id: String,
+    @PrimaryKey val id: String,
     val name: String,
     val wifi: Double,
     val seat: Double,
@@ -33,10 +40,10 @@ data class CafeNomad(
     val latitude: String,
     val longitude: String,
     val url: String,
-    val limited_time: String,
+    @ColumnInfo(name = "limited_time") @SerializedName("limited_time") val limitedTime: String,
     val socket: String,
-    val standing_desk: String,
+    @ColumnInfo(name = "standing_desk") @SerializedName("standing_desk") val standingDesk: String,
     val city: String,
     val mrt: String,
-    val open_time: String,
+    @ColumnInfo(name = "open_time") @SerializedName("open_time") val openTime: String,
 )

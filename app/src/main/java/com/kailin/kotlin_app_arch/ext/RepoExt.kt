@@ -4,29 +4,42 @@ import com.kailin.kotlin_app_arch.model.RepoState
 import com.kailin.kotlin_app_arch.model.RepoStatus
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
-import kotlin.experimental.ExperimentalTypeInference
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 
-@OptIn(ExperimentalTypeInference::class)
-fun <T : Any, R : RepoState<T>> retrofitFlow(
-    rClass: KClass<R>,
-    @BuilderInference block: suspend () -> Response<T>,
-): Flow<R> =
-    flow {
-        val response = block()
-        val state = when (response.code()) {
-            200 -> reflectSuccess(response, rClass)
-            302 -> reflectRedirect(response, rClass)
-            401 -> reflectTokenExpired(rClass)
-            else -> reflectFail(response, rClass)
-        }
-        emit(state)
-    }.onStart {
-        emit(reflectLoading(rClass))
-    }.catch {
-        emit(reflectThrow(it, rClass))
+fun <T : Any, R : RepoState<T>> Response<T>.asRepoState(rClass: KClass<R>): R {
+    return when (code()) {
+        200 -> reflectSuccess(this, rClass)
+        302 -> reflectRedirect(this, rClass)
+        401 -> reflectTokenExpired(rClass)
+        else -> reflectFail(this, rClass)
     }
+}
+
+fun <T : Any, R : RepoState<T>> daoFlow(
+    rClass: KClass<R>,
+    daoBlock: suspend () -> Response<T>,
+    apiBlock: suspend () -> Response<T>
+): Flow<R> = flow {
+
+}
+fun <T : Any, R : RepoState<T>> apiFlow(
+    rClass: KClass<R>, block: suspend () -> Response<T>,
+): Flow<R> = flow {
+    val response = block()
+    val state = when (response.code()) {
+        200 -> reflectSuccess(response, rClass)
+        302 -> reflectRedirect(response, rClass)
+        401 -> reflectTokenExpired(rClass)
+        else -> reflectFail(response, rClass)
+    }
+    emit(state)
+}.onStart {
+    emit(reflectLoading(rClass))
+}.catch {
+    emit(reflectThrow(it, rClass))
+}
+
 
 private fun <T : Any, R : RepoState<T>> reflectSuccess(
     response: Response<T>,
@@ -85,14 +98,13 @@ private fun <T : Any, R : RepoState<T>> reflectFail(response: Response<T>, rClas
     return primaryConstructor.callBy(arguments)
 }
 
-private fun <T : Any, R : RepoState<T>> reflectThrow(throwable: Throwable, rClass: KClass<R>): R {
+private fun <T : Any, R : RepoState<T>> reflectThrow(t: Throwable, rClass: KClass<R>): R {
     val primaryConstructor = rClass.primaryConstructor
     val parameters = primaryConstructor!!.parameters
     val arguments = parameters.associateWith { parameter ->
         when (parameter.index) {
             0 -> RepoStatus.Fail
-            2 -> throwable.localizedMessage
-            3 -> throwable
+            3 -> t
             else -> null
         }
     }
