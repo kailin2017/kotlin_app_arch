@@ -1,6 +1,5 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.di
 
-import tw.idv.kailin.kotlin.cafe.BuildConfig
 import tw.idv.kailin.kotlin.cafe.util.connect.OkHttpHelper
 import tw.idv.kailin.kotlin.cafe.util.connect.RetrofitHelper
 import dagger.Module
@@ -9,6 +8,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import tw.idv.kailin.kotlin.cafe.BuildConfig
+import tw.idv.kailin.kotlin.cafe.api.CafeApi
 import javax.inject.Qualifier
 import javax.inject.Singleton
 

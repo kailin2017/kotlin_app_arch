@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.model
 
 data class CafeState(
     override val status: RepoStatus,

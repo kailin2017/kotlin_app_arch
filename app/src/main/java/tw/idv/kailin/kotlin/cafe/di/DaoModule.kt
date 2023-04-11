@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.di
 
 import android.content.Context
 import androidx.room.Room

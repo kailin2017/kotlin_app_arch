@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.ui.screen.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import tw.idv.kailin.kotlin.cafe.CafeNomad
+import tw.idv.kailin.kotlin.cafe.model.CafeNomad
 import kotlinx.coroutines.flow.Flow
 
 @Dao

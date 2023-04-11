@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.ui.screen.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

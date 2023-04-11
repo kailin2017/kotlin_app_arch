@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.model
 
 enum class RepoStatus {
     Success, Fail, Loading, Redirect, TokenExpired, Empty

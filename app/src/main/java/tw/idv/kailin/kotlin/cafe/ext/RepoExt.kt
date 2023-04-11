@@ -2,6 +2,8 @@ package tw.idv.kailin.kotlin.cafe
 
 import kotlinx.coroutines.flow.*
 import retrofit2.Response
+import tw.idv.kailin.kotlin.cafe.model.RepoState
+import tw.idv.kailin.kotlin.cafe.model.RepoStatus
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 

@@ -1,12 +1,12 @@
 package tw.idv.kailin.kotlin.cafe.repo
 
-import tw.idv.kailin.kotlin.cafe.CafeNomad
-import tw.idv.kailin.kotlin.cafe.CafeState
-import tw.idv.kailin.kotlin.cafe.RepoStatus
+import tw.idv.kailin.kotlin.cafe.model.CafeNomad
+import tw.idv.kailin.kotlin.cafe.model.CafeState
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSource
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeDaoSource
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
+import tw.idv.kailin.kotlin.cafe.model.RepoStatus
 import javax.inject.Inject
 
 class CafeRepoImpl @Inject constructor(

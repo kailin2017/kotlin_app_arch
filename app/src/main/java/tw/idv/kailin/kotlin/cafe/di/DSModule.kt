@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.di
 
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSource
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSourceImpl

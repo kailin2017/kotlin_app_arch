@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import tw.idv.kailin.kotlin.cafe.CafeNomad
-import tw.idv.kailin.kotlin.cafe.RepoStatus
+import tw.idv.kailin.kotlin.cafe.model.CafeNomad
+import tw.idv.kailin.kotlin.cafe.model.RepoStatus
 import tw.idv.kailin.kotlin.cafe.Kotlin_app_archTheme
 
 @Composable

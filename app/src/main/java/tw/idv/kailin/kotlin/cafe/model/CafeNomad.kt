@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

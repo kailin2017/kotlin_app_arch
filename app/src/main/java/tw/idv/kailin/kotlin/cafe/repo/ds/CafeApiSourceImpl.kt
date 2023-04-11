@@ -1,8 +1,8 @@
 package tw.idv.kailin.kotlin.cafe.repo.ds
 
-import tw.idv.kailin.kotlin.cafe.CafeApi
+import tw.idv.kailin.kotlin.cafe.api.CafeApi
 import tw.idv.kailin.kotlin.cafe.apiFlow
-import tw.idv.kailin.kotlin.cafe.CafeState
+import tw.idv.kailin.kotlin.cafe.model.CafeState
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

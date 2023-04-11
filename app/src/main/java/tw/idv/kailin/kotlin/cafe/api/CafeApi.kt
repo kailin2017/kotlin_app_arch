@@ -1,9 +1,10 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.api
 
-import tw.idv.kailin.kotlin.cafe.BuildConfig
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import tw.idv.kailin.kotlin.cafe.BuildConfig
+import tw.idv.kailin.kotlin.cafe.model.CafeNomad
 
 interface CafeApi {
 
