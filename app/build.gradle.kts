@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.kailin.kotlin_app_arch"
+    namespace = "tw.idv.kailin.kotlin.cafe"
     compileSdk = AndroidConfig.compileSdk
 
     defaultConfig {
-        applicationId = "com.kailin.kotlin_app_arch"
+        applicationId = "tw.idv.kailin.kotlin.cafe"
         minSdk = AndroidConfig.minSdk
         targetSdk = AndroidConfig.targetSdk
         versionCode = AndroidConfig.versionCode
