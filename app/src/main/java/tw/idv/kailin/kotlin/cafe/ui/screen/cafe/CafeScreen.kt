@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import tw.idv.kailin.kotlin.cafe.model.CafeNomad
 import tw.idv.kailin.kotlin.cafe.model.RepoStatus
-import tw.idv.kailin.kotlin.cafe.Kotlin_app_archTheme
+import tw.idv.kailin.kotlin.cafe.ui.theme.Kotlin_app_archTheme
 
 @Composable
 fun CafeScreen(

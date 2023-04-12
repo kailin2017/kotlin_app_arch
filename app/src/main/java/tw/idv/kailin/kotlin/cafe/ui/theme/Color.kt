@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

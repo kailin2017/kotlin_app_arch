@@ -47,7 +47,7 @@ fun MainNavHost(
         modifier = modifier
     ) {
         composable(route = MainRoute.Home.name) {
-            HomeScreen(modifier, navController)
+            HomeScreen(modifier, navController, hiltViewModel())
         }
         composable(route = MainRoute.Cafe.name) {
             CafeScreen(modifier, hiltViewModel())

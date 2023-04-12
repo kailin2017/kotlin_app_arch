@@ -22,7 +22,7 @@ enum class HomeRoute { List, Map }
 fun HomeScreen(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
     Scaffold(bottomBar = {
@@ -32,7 +32,7 @@ fun HomeScreen(
             HomeLoading(modifier)
         } else {
             when (uiState.selected) {
-                HomeRoute.List -> HomeListScreen(modifier, navController)
+                HomeRoute.List -> HomeListScreen(modifier, navController, hiltViewModel())
                 HomeRoute.Map -> HomeMapScreen(modifier, navController)
             }
         }

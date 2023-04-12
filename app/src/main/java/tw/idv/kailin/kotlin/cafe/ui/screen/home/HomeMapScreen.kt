@@ -4,12 +4,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun HomeMapScreen(
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController,
 ) {
     Text(text = "HomeMapScreen")
 }
