@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -7,6 +9,12 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
 }
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+val googleMapsApiKey = properties["googleMapsApiKey"]
+
+System.out.println("googleMapsApiKey: $googleMapsApiKey")
 
 android {
     namespace = "tw.idv.kailin.kotlin.cafe"
@@ -19,7 +27,11 @@ android {
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue("string", "googleMapsApiKey", "\"$googleMapsApiKey\"")
     }
+
+
 //    signingConfigs {
 //        val properties = gradleLocalProperties(rootDir)
 //        getByName("debug") {
@@ -84,6 +96,13 @@ android {
     }
 }
 
+fun getGoogleMapsApiKey(): String {
+    val localProperties = Properties()
+    val inputStream = File("local.properties").inputStream()
+    localProperties.load(inputStream)
+    return localProperties.getProperty("googleMapsApiKey")
+}
+
 dependencies {
     implementation(Depends.gson)
     implementation(Depends.AndroidX.core)
@@ -102,6 +121,8 @@ dependencies {
     implementation(Depends.Dagger.hilt)
     kapt(Depends.Dagger.hiltCompiler)
     implementation(Depends.Dagger.hiltNavigationCompose)
+    implementation(Depends.Google.mapCompose)
+    implementation(Depends.Google.playMap)
     implementation(Depends.Kotlin.reflect)
 //    implementation(Depends.Kotlin.coroutines)
 //    implementation(Depends.Kotlin.coroutinesAndroid)

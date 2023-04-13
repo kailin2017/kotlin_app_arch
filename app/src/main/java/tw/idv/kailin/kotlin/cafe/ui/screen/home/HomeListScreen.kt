@@ -23,15 +23,15 @@ fun HomeListScreen(
     viewModel: HomeListViewModel
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    Column {
-        CafeFilter(modifier, uiState.selectedCities) {
+    Column(modifier = modifier.fillMaxSize()) {
+        CafeFilter(selectedCities = uiState.selectedCities) {
             viewModel.dialogExpanded(true)
         }
-        CafeList(modifier, uiState.cafes)
+        CafeList(cafes = uiState.cafes)
     }
     if (uiState.dialogExpanded) {
         FilterDialog(
-            modifier = modifier,
+            modifier = Modifier,
             cities = uiState.cities,
             selectCities = uiState.selectedCities,
             onCheckedChange = { city, selected ->
@@ -125,7 +125,6 @@ fun FilterDialogList(
 
 @Composable
 fun CafeFilter(
-    modifier: Modifier = Modifier,
     selectedCities: List<String>,
     onShowFilter: () -> Unit
 ) {
@@ -136,7 +135,7 @@ fun CafeFilter(
         selectedCities.joinToString(" , ")
     }
     Box(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onShowFilter)
             .padding(16.dp)
@@ -149,52 +148,52 @@ fun CafeFilter(
 }
 
 @Composable
-fun CafeList(modifier: Modifier = Modifier, cafes: List<CafeNomad> = listOf()) {
+fun CafeList(cafes: List<CafeNomad> = listOf()) {
     val typography = MaterialTheme.typography
-    LazyColumn(modifier.padding(start = 16.dp, end = 16.dp)) {
+    LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(cafes) {
             Card(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp)
             ) {
-                Column(modifier = modifier.padding(16.dp)) {
+                Column(modifier = Modifier.padding(16.dp)) {
                     Text(text = it.name, style = typography.bodyLarge)
-                    Box(modifier = modifier.height(8.dp))
-                    Row(modifier = modifier.fillMaxWidth()) {
+                    Box(modifier = Modifier.height(8.dp))
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             text = "咖啡:${it.tasty}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                         Text(
                             text = "價格:${it.cheap}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                     }
-                    Row(modifier = modifier.fillMaxWidth()) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             text = "安靜:${it.quiet}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                         Text(
                             text = "音樂:${it.music}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                     }
-                    Row(modifier = modifier.fillMaxWidth()) {
+                    Row(modifier = Modifier.fillMaxWidth()) {
                         Text(
                             text = "Wi-Fi:${it.wifi}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                         Text(
                             text = "座位:${it.seat}★",
                             style = typography.bodyMedium,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
                     }
                     Divider(

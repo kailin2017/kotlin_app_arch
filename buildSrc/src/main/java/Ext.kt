@@ -22,6 +22,11 @@ object Version {
         const val hilt = "2.44"
     }
 
+    object Google {
+        const val mapCompose = "2.11.0"
+        const val playMap = "18.1.0"
+    }
+
     object Squareup {
         const val okHttp = "4.10.0"
         const val retrofit = "2.9.0"
@@ -32,10 +37,12 @@ object Version {
 object Depends {
 
     const val gson = "com.google.code.gson:gson:${Version.gson}"
+
     object Kotlin {
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlin}"
-        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.kotlin}"
+        const val coroutinesAndroid =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.kotlin}"
     }
 
     object AndroidX {
@@ -64,11 +71,11 @@ object Depends {
                 "androidx.navigation:navigation-compose:${Version.AndroidX.navigation}"
         }
 
-        object Room{
-            const val runtime ="androidx.room:room-runtime:${Version.AndroidX.room}"
-            const val ktx ="androidx.room:room-ktx:${Version.AndroidX.room}"
-            const val compiler ="androidx.room:room-compiler:${Version.AndroidX.room}"
-            const val testing ="androidx.room:room-testing:${Version.AndroidX.room}"
+        object Room {
+            const val runtime = "androidx.room:room-runtime:${Version.AndroidX.room}"
+            const val ktx = "androidx.room:room-ktx:${Version.AndroidX.room}"
+            const val compiler = "androidx.room:room-compiler:${Version.AndroidX.room}"
+            const val testing = "androidx.room:room-testing:${Version.AndroidX.room}"
         }
     }
 
@@ -76,6 +83,11 @@ object Depends {
         const val hilt = "com.google.dagger:hilt-android:${Version.Dagger.hilt}"
         const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.Dagger.hilt}"
+    }
+
+    object Google {
+        const val mapCompose = "com.google.maps.android:maps-compose:${Version.Google.mapCompose}"
+        const val playMap = "com.google.android.gms:play-services-maps:${Version.Google.playMap}"
     }
 
     object Squareup {

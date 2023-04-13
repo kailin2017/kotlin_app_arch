@@ -28,11 +28,12 @@ fun HomeScreen(
     Scaffold(
         bottomBar = {
             HomeBottomBar(modifier, uiState.selected, viewModel::setSelected)
-        }) {
+        },
+    ) {
         if (uiState.cafeState.status == RepoStatus.Loading) {
             HomeLoading(modifier)
         } else {
-            HomeContent(modifier, navController, uiState.selected)
+            HomeContent(modifier.padding(it), navController, uiState.selected)
         }
     }
 }
