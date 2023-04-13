@@ -19,6 +19,7 @@ class HomeViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             cafeRepo.repoState.collect {
+                println("cafeRepo.repoState.collect ${it.status}")
                 _uiState.update { s ->
                     s.copy(cafeState = it)
                 }

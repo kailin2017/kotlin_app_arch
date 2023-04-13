@@ -103,6 +103,8 @@ dependencies {
     kapt(Depends.Dagger.hiltCompiler)
     implementation(Depends.Dagger.hiltNavigationCompose)
     implementation(Depends.Kotlin.reflect)
+//    implementation(Depends.Kotlin.coroutines)
+//    implementation(Depends.Kotlin.coroutinesAndroid)
     implementation(Depends.Squareup.okHttp)
     implementation(Depends.Squareup.okHttpLogger)
     implementation(Depends.Squareup.retrofit)

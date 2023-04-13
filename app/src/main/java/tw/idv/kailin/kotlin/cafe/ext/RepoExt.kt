@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe
+package tw.idv.kailin.kotlin.cafe.ext
 
 import kotlinx.coroutines.flow.*
 import retrofit2.Response

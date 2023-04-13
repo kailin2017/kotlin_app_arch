@@ -1,9 +1,9 @@
 package tw.idv.kailin.kotlin.cafe.ui.screen.home
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
@@ -25,22 +25,20 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    Scaffold(bottomBar = {
-        HomeNavigationBar(modifier, uiState.selected, viewModel::setSelected)
-    }) {
+    Scaffold(
+        bottomBar = {
+            HomeBottomBar(modifier, uiState.selected, viewModel::setSelected)
+        }) {
         if (uiState.cafeState.status == RepoStatus.Loading) {
             HomeLoading(modifier)
         } else {
-            when (uiState.selected) {
-                HomeRoute.List -> HomeListScreen(modifier, navController, hiltViewModel())
-                HomeRoute.Map -> HomeMapScreen(modifier, navController)
-            }
+            HomeContent(modifier, navController, uiState.selected)
         }
     }
 }
 
 @Composable
-fun HomeNavigationBar(
+fun HomeBottomBar(
     modifier: Modifier = Modifier,
     selectedRoute: HomeRoute = HomeRoute.List,
     onSelectedRoute: (HomeRoute) -> Unit
@@ -73,16 +71,17 @@ fun HomeLoading(
     }
 }
 
-//@Composable
-//fun HomeContent(
-//    modifier: Modifier = Modifier,
-//    navController: NavHostController = rememberNavController(),
-//){
-//    when (selectedItem) {
-//        HomeRoute.List -> HomeListScreen()
-//        HomeRoute.Map -> HomeMapScreen()
-//    }
-//}
+@Composable
+fun HomeContent(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+    selectedRoute: HomeRoute
+) {
+    when (selectedRoute) {
+        HomeRoute.List -> HomeListScreen(modifier, navController, hiltViewModel())
+        HomeRoute.Map -> HomeMapScreen(modifier, navController)
+    }
+}
 
 
 

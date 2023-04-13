@@ -7,5 +7,8 @@ import tw.idv.kailin.kotlin.cafe.model.CafeNomad
 interface CafeRepo {
 
     val repoState: Flow<CafeState>
-    val filterCafes: Flow<List<CafeNomad>>
+    val cafes: Flow<List<CafeNomad>>
+    val cities: Flow<List<String>>
+
+    fun cafes(vararg cities: String): Flow<List<CafeNomad>>
 }

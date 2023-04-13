@@ -7,7 +7,15 @@ import javax.inject.Inject
 
 class CafeDaoSourceImpl @Inject constructor(private val dao: CafeDao) : CafeDaoSource {
 
-    override val cafes: Flow<List<CafeNomad>> = dao.getFlow()
+    override val cafeCount: Flow<Int> = dao.getCafeCount()
+
+    override val cafes: Flow<List<CafeNomad>> = dao.getCafes()
+
+    override val cities: Flow<List<String>> = dao.getCities()
 
     override suspend fun insert(vararg cafeNomad: CafeNomad) = dao.insert(*cafeNomad)
+
+    override fun cafes(vararg cities: String): Flow<List<CafeNomad>> = dao.getCafes(*cities)
+
+    override fun cities(): Flow<List<String>> = dao.getCities()
 }

@@ -14,8 +14,10 @@ class CafeRepoImpl @Inject constructor(
     private val daoSource: CafeDaoSource,
 ) : CafeRepo {
 
-    override val filterCafes: Flow<List<CafeNomad>> = daoSource.cafes
+    override val cafes: Flow<List<CafeNomad>> = daoSource.cafes
+    override val cities: Flow<List<String>> = daoSource.cities
 
+    private val localCafes: Flow<Int> = daoSource.cafeCount
     private val updateCafes: Flow<CafeState> = apiSource.cafes.onEach {
         if (it.status == RepoStatus.Success) {
             it.data?.toTypedArray()?.let { data -> daoSource.insert(*data) }
@@ -23,11 +25,13 @@ class CafeRepoImpl @Inject constructor(
     }
 
     @OptIn(FlowPreview::class)
-    override val repoState: Flow<CafeState> = filterCafes.flatMapConcat {
-        return@flatMapConcat if (it.isEmpty()) {
+    override val repoState: Flow<CafeState> = localCafes.flatMapConcat {
+        return@flatMapConcat if (it == 0) {
             updateCafes
         } else {
-            flowOf(CafeState(RepoStatus.Success, data = it))
+            flowOf(CafeState(RepoStatus.Success))
         }
     }
+
+    override fun cafes(vararg cities:String) = daoSource.cafes(*cities)
 }

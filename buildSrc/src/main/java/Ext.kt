@@ -34,6 +34,8 @@ object Depends {
     const val gson = "com.google.code.gson:gson:${Version.gson}"
     object Kotlin {
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlin}"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.kotlin}"
     }
 
     object AndroidX {

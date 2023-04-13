@@ -6,7 +6,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface CafeDaoSource {
 
+    val cafeCount: Flow<Int>
+
     val cafes: Flow<List<CafeNomad>>
 
+    val cities: Flow<List<String>>
+
     suspend fun insert(vararg cafeNomad: CafeNomad)
+
+    fun cafes(vararg cities: String): Flow<List<CafeNomad>>
+
+    fun cities(): Flow<List<String>>
 }

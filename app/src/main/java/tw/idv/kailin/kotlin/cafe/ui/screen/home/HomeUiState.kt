@@ -5,5 +5,6 @@ import tw.idv.kailin.kotlin.cafe.model.RepoStatus
 
 data class HomeUiState(
     val cafeState: CafeState = CafeState(RepoStatus.Loading),
-    val selected: HomeRoute = HomeRoute.List
+    val cities: List<String> = listOf(),
+    val selected: HomeRoute = HomeRoute.List,
 )

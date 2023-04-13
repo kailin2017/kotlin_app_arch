@@ -10,11 +10,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CafeDao {
 
-    @Query("select count(*) from CafeNomad")
-    fun getCount(): Int
+    @Query("SELECT COUNT(*) FROM CafeNomad")
+    fun getCafeCount(): Flow<Int>
 
-    @Query("select * from CafeNomad")
-    fun getFlow(): Flow<List<CafeNomad>>
+    @Query("SELECT * FROM CafeNomad")
+    fun getCafes(): Flow<List<CafeNomad>>
+
+    @Query("SELECT * FROM CafeNomad WHERE city IN(:cities)")
+    fun getCafes(vararg cities: String): Flow<List<CafeNomad>>
+
+    @Query("SELECT DISTINCT city FROM CafeNomad")
+    fun getCities(): Flow<List<String>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(vararg cafeNomad: CafeNomad)
