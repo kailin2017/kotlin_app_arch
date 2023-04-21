@@ -26,7 +26,7 @@ android {
         targetSdk = AndroidConfig.targetSdk
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "tw.idv.kailin.kotlin.cafe.CustomJUnitRunner"
 
         resValue("string", "googleMapsApiKey", "\"$googleMapsApiKey\"")
     }
@@ -106,6 +106,11 @@ fun getGoogleMapsApiKey(): String {
 dependencies {
     implementation(Depends.gson)
     implementation(Depends.AndroidX.core)
+    androidTestImplementation(Depends.AndroidX.runnerTest)
+//    testImplementation(Depends.AndroidX.coreTest)
+    testImplementation(Depends.mockito)
+    testImplementation(Depends.junit)
+    testImplementation(Depends.AndroidX.ktxTest)
     implementation(Depends.AndroidX.appCompat)
     implementation(Depends.AndroidX.lifecycleRuntime)
     implementation(Depends.AndroidX.lifecycleViewModel)
@@ -117,15 +122,22 @@ dependencies {
     implementation(Depends.AndroidX.Room.runtime)
     implementation(Depends.AndroidX.Room.ktx)
     kapt(Depends.AndroidX.Room.compiler)
+    kaptTest(Depends.AndroidX.Room.compiler)
+    kaptAndroidTest(Depends.AndroidX.Room.compiler)
     testImplementation(Depends.AndroidX.Room.testing)
-    implementation(Depends.Dagger.hilt)
-    kapt(Depends.Dagger.hiltCompiler)
     implementation(Depends.Dagger.hiltNavigationCompose)
+    implementation(Depends.Dagger.hilt)
+    testImplementation(Depends.Dagger.hiltTest)
+    androidTestImplementation(Depends.Dagger.hiltTest)
+    kapt(Depends.Dagger.hiltCompiler)
+//    kaptTest(Depends.Dagger.hiltCompiler)
+//    kaptAndroidTest(Depends.Dagger.hiltCompiler)
     implementation(Depends.Google.mapCompose)
     implementation(Depends.Google.playMap)
     implementation(Depends.Kotlin.reflect)
-//    implementation(Depends.Kotlin.coroutines)
-//    implementation(Depends.Kotlin.coroutinesAndroid)
+    implementation(Depends.Kotlin.coroutines)
+    implementation(Depends.Kotlin.coroutinesAndroid)
+    testImplementation(Depends.Kotlin.coroutinesTest)
     implementation(Depends.Squareup.okHttp)
     implementation(Depends.Squareup.okHttpLogger)
     implementation(Depends.Squareup.retrofit)

@@ -3,6 +3,9 @@ object Version {
     const val gradle = "7.4.0"
     const val kotlin = "1.8.10"
     const val gson = "2.10"
+    const val junit = "4.13.2"
+    const val mockito = "3.12.4"
+    const val coroutine = "1.6.4"
 
     object AndroidX {
         const val core = "1.10.0"
@@ -10,6 +13,7 @@ object Version {
         const val navigation = "2.5.3"
         const val lifecycle = "2.6.1"
         const val room = "2.5.1"
+        const val ktxTest = "1.1.5"
 
         object Componse {
             const val activity = "1.7.0"
@@ -37,16 +41,23 @@ object Version {
 object Depends {
 
     const val gson = "com.google.code.gson:gson:${Version.gson}"
+    const val junit = "junit:junit:${Version.junit}"
+    const val mockito = "org.mockito:mockito-core:${Version.mockito}"
 
     object Kotlin {
         const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Version.kotlin}"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.kotlin}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutine}"
         const val coroutinesAndroid =
-            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.kotlin}"
+            "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutine}"
+        const val coroutinesTest =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Version.coroutine}"
     }
 
     object AndroidX {
         const val core = "androidx.core:core-ktx:${Version.AndroidX.core}"
+        const val coreTest = "androidx.core:core-testing:${Version.AndroidX.core}"
+        const val ktxTest = "androidx.test.ext:junit-ktx:${Version.AndroidX.ktxTest}"
+        const val runnerTest = "androidx.test:runner:1.5.2"
         const val appCompat = "androidx.appcompat:appcompat:${Version.AndroidX.appCompat}"
         const val lifecycleRuntime =
             "androidx.lifecycle:lifecycle-runtime-ktx:${Version.AndroidX.lifecycle}"
@@ -83,6 +94,7 @@ object Depends {
         const val hilt = "com.google.dagger:hilt-android:${Version.Dagger.hilt}"
         const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Version.Dagger.hilt}"
+        const val hiltTest = "com.google.dagger:hilt-android-testing:${Version.Dagger.hilt}"
     }
 
     object Google {
