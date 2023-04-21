@@ -1,20 +1,17 @@
 package tw.idv.kailin.kotlin.cafe.ui.screen.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import tw.idv.kailin.kotlin.cafe.model.RepoStatus
+import tw.idv.kailin.kotlin.cafe.ui.screen.home.dialog.FilterDialogScreen
 
 enum class HomeRoute { List, Map }
 
@@ -26,15 +23,53 @@ fun HomeScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     Scaffold(
+        topBar = {
+            HomeTopBar(selectedCities = uiState.selectedCities) {
+                viewModel.dialogExpanded(true)
+            }
+        },
         bottomBar = {
-            HomeBottomBar(modifier, uiState.selected, viewModel::setSelected)
+            HomeBottomBar(modifier, uiState.selectedTab, viewModel::setSelectedTab)
         },
     ) {
-        if (uiState.cafeState.status == RepoStatus.Loading) {
-            HomeLoading(modifier)
-        } else {
-            HomeContent(modifier.padding(it), navController, uiState.selected)
+        when (uiState.selectedTab) {
+            HomeRoute.List -> HomeListScreen(modifier.padding(it), navController, viewModel)
+            HomeRoute.Map -> HomeMapScreen(modifier.padding(it), navController, viewModel)
         }
+    }
+    if (uiState.dialogExpanded) {
+        FilterDialogScreen(
+            cities = uiState.cities,
+            defaultSelect = uiState.selectedCities,
+            onDismiss = { viewModel.dialogExpanded(false) },
+        ) {
+            viewModel.dialogExpanded(false)
+            viewModel.setSelectCity(*it.toTypedArray())
+        }
+    }
+}
+
+@Composable
+fun HomeTopBar(
+    selectedCities: List<String>,
+    onShowFilter: () -> Unit
+) {
+    val typography = MaterialTheme.typography
+    val selectedCitiesTest = if (selectedCities.isEmpty()) {
+        "All"
+    } else {
+        selectedCities.joinToString(" , ")
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onShowFilter)
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Filter City : $selectedCitiesTest",
+            style = typography.bodyMedium
+        )
     }
 }
 
@@ -56,34 +91,6 @@ fun HomeBottomBar(
         }
     }
 }
-
-@Composable
-fun HomeLoading(
-    modifier: Modifier = Modifier,
-) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        CircularProgressIndicator(modifier = modifier)
-    }
-}
-
-@Composable
-fun HomeContent(
-    modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
-    selectedRoute: HomeRoute
-) {
-    when (selectedRoute) {
-        HomeRoute.List -> HomeListScreen(modifier, navController, hiltViewModel())
-        HomeRoute.Map -> HomeMapScreen(modifier, navController)
-    }
-}
-
 
 
 

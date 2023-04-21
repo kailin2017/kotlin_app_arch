@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.*
 import tw.idv.kailin.kotlin.cafe.model.RepoStatus
 import javax.inject.Inject
 
+@OptIn(FlowPreview::class)
 class CafeRepoImpl @Inject constructor(
     apiSource: CafeApiSource,
     private val daoSource: CafeDaoSource,
@@ -17,21 +18,29 @@ class CafeRepoImpl @Inject constructor(
     override val cafes: Flow<List<CafeNomad>> = daoSource.cafes
     override val cities: Flow<List<String>> = daoSource.cities
 
-    private val localCafes: Flow<Int> = daoSource.cafeCount
-    private val updateCafes: Flow<CafeState> = apiSource.cafes.onEach {
-        if (it.status == RepoStatus.Success) {
-            it.data?.toTypedArray()?.let { data -> daoSource.insert(*data) }
+    override val cafeFlow: Flow<CafeState> = daoSource.cafes.flatMapConcat {
+        return@flatMapConcat if (it.isEmpty()) {
+            apiSource.cafes.onEach { state ->
+                if (state.status == RepoStatus.Success) {
+                    state.data?.toTypedArray()?.let { data -> daoSource.insert(*data) }
+                }
+            }
+        } else {
+            flowOf(CafeState(RepoStatus.Success, data = it))
         }
     }
 
-    @OptIn(FlowPreview::class)
-    override val repoState: Flow<CafeState> = localCafes.flatMapConcat {
+    override val repoState: Flow<CafeState> = daoSource.cafeCount.flatMapConcat {
         return@flatMapConcat if (it == 0) {
-            updateCafes
+            apiSource.cafes.onEach { state ->
+                if (state.status == RepoStatus.Success) {
+                    state.data?.toTypedArray()?.let { data -> daoSource.insert(*data) }
+                }
+            }
         } else {
             flowOf(CafeState(RepoStatus.Success))
         }
     }
 
-    override fun cafes(vararg cities:String) = daoSource.cafes(*cities)
+    override fun cafes(vararg cities: String) = daoSource.cafes(*cities)
 }
