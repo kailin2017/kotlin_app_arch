@@ -19,6 +19,17 @@ interface CafeDao {
     @Query("SELECT * FROM CafeNomad WHERE city IN(:cities)")
     fun getCafes(vararg cities: String): Flow<List<CafeNomad>>
 
+    @Query("SELECT * FROM CafeNomad WHERE tasty >= :tasty AND cheap >= :cheap AND quiet >= :quiet AND music >= :music AND seat >= :seat AND wifi >= :wifi AND city IN(:cities)")
+    fun getCafes(
+        tasty: Float,
+        cheap: Float,
+        quiet: Float,
+        music: Float,
+        seat: Float,
+        wifi: Float,
+        vararg cities: String
+    ): Flow<List<CafeNomad>>
+
     @Query("SELECT DISTINCT city FROM CafeNomad")
     fun getCities(): Flow<List<String>>
 

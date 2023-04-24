@@ -7,6 +7,7 @@ data class HomeUiState(
     val cafeState: CafeState = CafeState(RepoStatus.Loading),
     val cities: List<String> = listOf(),
     val selectedCities: List<String> = listOf(),
+    val filterState: HomeFilterState = HomeFilterState(),
     val dialogExpanded: Boolean = false,
     val selectedTab: HomeRoute = HomeRoute.List,
 )

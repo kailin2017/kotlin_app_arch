@@ -43,4 +43,14 @@ class CafeRepoImpl @Inject constructor(
     }
 
     override fun cafes(vararg cities: String) = daoSource.cafes(*cities)
+
+    override fun cafes(
+        tasty: Float,
+        cheap: Float,
+        quiet: Float,
+        music: Float,
+        seat: Float,
+        wifi: Float,
+        vararg cities: String
+    ) = daoSource.cafes(tasty, cheap, quiet, music, seat, wifi, *cities)
 }

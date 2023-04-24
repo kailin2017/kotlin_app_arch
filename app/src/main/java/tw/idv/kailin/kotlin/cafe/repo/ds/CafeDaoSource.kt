@@ -16,5 +16,15 @@ interface CafeDaoSource {
 
     fun cafes(vararg cities: String): Flow<List<CafeNomad>>
 
+    fun cafes(
+        tasty: Float,
+        cheap: Float,
+        quiet: Float,
+        music: Float,
+        seat: Float,
+        wifi: Float,
+        vararg cities: String
+    ): Flow<List<CafeNomad>>
+
     fun cities(): Flow<List<String>>
 }

@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import tw.idv.kailin.kotlin.cafe.ui.screen.home.dialog.FilterDialogScreen
 
 enum class HomeRoute { List, Map }
 
@@ -24,7 +23,7 @@ fun HomeScreen(
     val uiState by viewModel.uiState.collectAsState()
     Scaffold(
         topBar = {
-            HomeTopBar(selectedCities = uiState.selectedCities) {
+            HomeTopBar(selectedCities = uiState.filterState.cities) {
                 viewModel.dialogExpanded(true)
             }
         },
@@ -40,11 +39,11 @@ fun HomeScreen(
     if (uiState.dialogExpanded) {
         FilterDialogScreen(
             cities = uiState.cities,
-            defaultSelect = uiState.selectedCities,
+            filter = uiState.filterState,
             onDismiss = { viewModel.dialogExpanded(false) },
         ) {
             viewModel.dialogExpanded(false)
-            viewModel.setSelectCity(*it.toTypedArray())
+            viewModel.filter(it)
         }
     }
 }

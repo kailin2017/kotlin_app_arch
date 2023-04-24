@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import tw.idv.kailin.kotlin.cafe.repo.CafeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import tw.idv.kailin.kotlin.cafe.model.CafeState
@@ -55,6 +53,27 @@ class HomeViewModel @Inject constructor(
                     state.copy(
                         selectedCities = cities.toList(),
                         cafeState = CafeState(RepoStatus.Success, data = it),
+                    )
+                }
+            }
+        }
+    }
+
+    fun filter(filterState: HomeFilterState) {
+        viewModelScope.launch {
+            cafeRepo.cafes(
+                filterState.tasty,
+                filterState.cheap,
+                filterState.quiet,
+                filterState.music,
+                filterState.seat,
+                filterState.wifi,
+                *filterState.cities.toTypedArray()
+            ).collect {
+                _uiState.update { state ->
+                    state.copy(
+                        cafeState = CafeState(RepoStatus.Success, data = it),
+                        filterState = filterState
                     )
                 }
             }

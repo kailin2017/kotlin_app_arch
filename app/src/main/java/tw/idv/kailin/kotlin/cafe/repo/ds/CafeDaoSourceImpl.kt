@@ -17,5 +17,14 @@ class CafeDaoSourceImpl @Inject constructor(private val dao: CafeDao) : CafeDaoS
 
     override fun cafes(vararg cities: String): Flow<List<CafeNomad>> = dao.getCafes(*cities)
 
+    override fun cafes(
+        tasty: Float,
+        cheap: Float,
+        quiet: Float,
+        music: Float,
+        seat: Float,
+        wifi: Float, vararg cities: String
+    ): Flow<List<CafeNomad>> = dao.getCafes(tasty, cheap, quiet, music, seat, wifi, *cities)
+
     override fun cities(): Flow<List<String>> = dao.getCities()
 }
