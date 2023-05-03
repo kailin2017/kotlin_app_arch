@@ -22,7 +22,13 @@ fun FilterDialogScreen(
     onConfirm: (HomeFilterState) -> Unit,
 ) {
     val typography = MaterialTheme.typography
-    val selectCities = remember { mutableStateListOf(*filter.cities.toTypedArray()) }
+    val selectCities = remember {
+        if (filter.cities.isNotEmpty()) {
+            mutableStateListOf(*filter.cities.toTypedArray())
+        } else {
+            mutableStateListOf(*cities.toTypedArray())
+        }
+    }
     var tasty by remember { mutableStateOf(filter.tasty) }
     var cheap by remember { mutableStateOf(filter.cheap) }
     var quiet by remember { mutableStateOf(filter.quiet) }
@@ -38,18 +44,18 @@ fun FilterDialogScreen(
                 .fillMaxHeight(0.95f)
                 .padding(8.dp)
         ) {
-            FilterSlider("咖啡", typography, tasty) { tasty = it }
-            FilterSlider("價錢", typography, cheap) { cheap = it }
-            FilterSlider("安靜", typography, quiet) { quiet = it }
-            FilterSlider("音樂", typography, music) { music = it }
-            FilterSlider("座位", typography, seat) { seat = it }
-            FilterSlider("WiFi", typography, wifi) { wifi = it }
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth()
                     .weight(1f),
             ) {
+                item { FilterSlider("咖啡", typography, tasty) { tasty = it } }
+                item { FilterSlider("價錢", typography, cheap) { cheap = it } }
+                item { FilterSlider("安靜", typography, quiet) { quiet = it } }
+                item { FilterSlider("音樂", typography, music) { music = it } }
+                item { FilterSlider("座位", typography, seat) { seat = it } }
+                item { FilterSlider("WiFi", typography, wifi) { wifi = it } }
                 items(cities) {
                     Row(
                         modifier = Modifier.padding(8.dp),
