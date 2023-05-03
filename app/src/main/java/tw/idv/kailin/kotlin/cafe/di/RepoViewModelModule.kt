@@ -1,7 +1,7 @@
 package tw.idv.kailin.kotlin.cafe.di
 
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepo
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepoImpl
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepo
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepoImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -9,8 +9,9 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-abstract class RepoModule {
+abstract class RepoViewModelModule {
 
     @Binds
-    abstract fun provideCafeRepo(repository: CafeRepoImpl): CafeRepo
+    abstract fun cafeRepo(repository: CafeRepoImpl): CafeRepo
 }
+

@@ -21,10 +21,10 @@ fun HomeMapScreen(
     viewModel: HomeViewModel
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    if (uiState.cafeState.status == RepoStatus.Loading){
+    if (uiState.cafes.isEmpty()) {
         CircularProgressIndicator(modifier = modifier)
     } else {
-        HomeMapContent(modifier = modifier, list = uiState.cafeState.data ?: listOf())
+        HomeMapContent(modifier = modifier, list = uiState.cafes)
     }
 }
 

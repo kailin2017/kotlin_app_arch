@@ -1,7 +1,7 @@
 package tw.idv.kailin.kotlin.cafe.di
 
-import tw.idv.kailin.kotlin.cafe.util.connect.OkHttpHelper
-import tw.idv.kailin.kotlin.cafe.util.connect.RetrofitHelper
+import tw.idv.kailin.kotlin.cafe.util.connect.okhttp.OkHttpFactory
+import tw.idv.kailin.kotlin.cafe.util.connect.retrofit.RetrofitFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,14 +29,14 @@ object ApiModule {
     @Singleton
     @Provides
     fun providesDefaultOkHttp(): OkHttpClient {
-        return OkHttpHelper.createOkHttp()
+        return OkHttpFactory.createOkHttp()
     }
 
     @DefaultRetrofit
     @Singleton
     @Provides
     fun providesDefaultRetrofit(@DefaultOkHttp okHttpClient: OkHttpClient): Retrofit {
-        return RetrofitHelper.createRetrofit(okHttpClient, BuildConfig.DOMAIN)
+        return RetrofitFactory.createRetrofit(okHttpClient, BuildConfig.DOMAIN)
     }
 
     @Singleton

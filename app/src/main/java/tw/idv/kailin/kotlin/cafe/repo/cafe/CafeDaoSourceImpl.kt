@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe.repo.ds
+package tw.idv.kailin.kotlin.cafe.repo.cafe
 
 import tw.idv.kailin.kotlin.cafe.dao.CafeDao
 import tw.idv.kailin.kotlin.cafe.model.CafeNomad
@@ -15,8 +15,6 @@ class CafeDaoSourceImpl @Inject constructor(private val dao: CafeDao) : CafeDaoS
 
     override suspend fun insert(vararg cafeNomad: CafeNomad) = dao.insert(*cafeNomad)
 
-    override fun cafes(vararg cities: String): Flow<List<CafeNomad>> = dao.getCafes(*cities)
-
     override fun cafes(
         tasty: Float,
         cheap: Float,
@@ -25,6 +23,4 @@ class CafeDaoSourceImpl @Inject constructor(private val dao: CafeDao) : CafeDaoS
         seat: Float,
         wifi: Float, vararg cities: String
     ): Flow<List<CafeNomad>> = dao.getCafes(tasty, cheap, quiet, music, seat, wifi, *cities)
-
-    override fun cities(): Flow<List<String>> = dao.getCities()
 }

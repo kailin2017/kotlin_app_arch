@@ -2,17 +2,19 @@ package tw.idv.kailin.kotlin.cafe.ui.screen.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepo
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import tw.idv.kailin.kotlin.cafe.model.CafeState
 import tw.idv.kailin.kotlin.cafe.model.RepoStatus
+import tw.idv.kailin.kotlin.cafe.repo.global.GlobalRepo
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val cafeRepo: CafeRepo
+    private val cafeRepo: CafeRepo,
+    private val globalRepo: GlobalRepo,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -20,16 +22,27 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            cafeRepo.cafeFlow.collect {
-                _uiState.update { s ->
-                    s.copy(cafeState = it)
+            cafeRepo.cities.collect {
+                _uiState.update { state ->
+                    state.copy(cities = it)
                 }
             }
         }
         viewModelScope.launch {
-            cafeRepo.cities.collect {
+            cafeRepo.cafes.collect {
                 _uiState.update { state ->
-                    state.copy(cities = it)
+                    state.copy(cafes = it)
+                }
+            }
+        }
+        viewModelScope.launch {
+            cafeRepo.updateCafes()
+        }
+        viewModelScope.launch {
+            globalRepo.message.collect {
+                println("globalRepo.message.collect $it")
+                _uiState.update { state ->
+                    state.copy(message = it)
                 }
             }
         }
@@ -41,27 +54,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun setSelectCity(vararg cities: String) {
-        viewModelScope.launch {
-            if (cities.isEmpty()) {
-                cafeRepo.cafes
-            } else {
-                cafeRepo.cafes(*cities)
-            }.collect {
-                println("cafeRepo.cafes().collect ${it.size}")
-                _uiState.update { state ->
-                    state.copy(
-                        selectedCities = cities.toList(),
-                        cafeState = CafeState(RepoStatus.Success, data = it),
-                    )
-                }
-            }
-        }
-    }
-
     fun filter(filterState: HomeFilterState) {
         viewModelScope.launch {
-            cafeRepo.cafes(
+            cafeRepo.filterCafes(
                 filterState.tasty,
                 filterState.cheap,
                 filterState.quiet,
@@ -72,7 +67,7 @@ class HomeViewModel @Inject constructor(
             ).collect {
                 _uiState.update { state ->
                     state.copy(
-                        cafeState = CafeState(RepoStatus.Success, data = it),
+                        cafes = it,
                         filterState = filterState
                     )
                 }

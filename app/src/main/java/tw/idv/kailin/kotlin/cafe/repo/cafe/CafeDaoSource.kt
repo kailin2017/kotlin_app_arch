@@ -1,17 +1,18 @@
-package tw.idv.kailin.kotlin.cafe.repo
+package tw.idv.kailin.kotlin.cafe.repo.cafe
 
-import tw.idv.kailin.kotlin.cafe.model.CafeState
-import kotlinx.coroutines.flow.Flow
 import tw.idv.kailin.kotlin.cafe.model.CafeNomad
+import kotlinx.coroutines.flow.Flow
 
-interface CafeRepo {
 
-    val repoState: Flow<CafeState>
-    val cafeFlow: Flow<CafeState>
+interface CafeDaoSource {
+
+    val cafeCount: Flow<Int>
+
     val cafes: Flow<List<CafeNomad>>
+
     val cities: Flow<List<String>>
 
-    fun cafes(vararg cities: String): Flow<List<CafeNomad>>
+    suspend fun insert(vararg cafeNomad: CafeNomad)
 
     fun cafes(
         tasty: Float,

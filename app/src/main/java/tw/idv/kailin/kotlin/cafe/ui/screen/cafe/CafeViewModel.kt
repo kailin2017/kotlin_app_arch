@@ -2,7 +2,7 @@ package tw.idv.kailin.kotlin.cafe.ui.screen.cafe
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepo
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -18,11 +18,11 @@ class CafeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            cafeRepo.repoState.collect {
-                _uiState.update { s ->
-                    s.copy(cafeState = it, cafes = it.data ?: listOf())
-                }
-            }
+//            cafeRepo.repoState.collect {
+//                _uiState.update { s ->
+//                    s.copy(cafeState = it, cafes = it.data ?: listOf())
+//                }
+//            }
         }
     }
 }

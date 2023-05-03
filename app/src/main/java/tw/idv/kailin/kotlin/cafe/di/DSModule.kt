@@ -1,9 +1,9 @@
 package tw.idv.kailin.kotlin.cafe.di
 
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSource
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSourceImpl
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeDaoSource
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeDaoSourceImpl
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeApiSource
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeApiSourceImpl
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeDaoSource
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeDaoSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,8 +14,8 @@ import dagger.hilt.android.components.ViewModelComponent
 abstract class DSModule {
 
     @Binds
-    abstract fun provideCafeApiSource(source: CafeApiSourceImpl): CafeApiSource
+    abstract fun cafeApiSource(source: CafeApiSourceImpl): CafeApiSource
 
     @Binds
-    abstract fun provideCafeDaoSource(source: CafeDaoSourceImpl): CafeDaoSource
+    abstract fun cafeDaoSource(source: CafeDaoSourceImpl): CafeDaoSource
 }

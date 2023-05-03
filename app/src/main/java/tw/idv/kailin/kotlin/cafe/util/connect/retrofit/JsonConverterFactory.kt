@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe.util.connect.converter
+package tw.idv.kailin.kotlin.cafe.util.connect.retrofit
 
 import com.google.gson.reflect.TypeToken
 import tw.idv.kailin.kotlin.cafe.util.GsonHelper

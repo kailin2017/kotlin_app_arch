@@ -19,13 +19,11 @@ fun HomeListScreen(
     viewModel: HomeViewModel
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    if (uiState.cafeState.status == RepoStatus.Loading){
+    if (uiState.cafes.isEmpty()) {
         CircularProgressIndicator(modifier = modifier)
     } else {
         LazyColumn(modifier = modifier.fillMaxWidth()) {
-            items(uiState.cafeState.data ?: listOf()) {
-                HomeListItem(it)
-            }
+            items(uiState.cafes) { HomeListItem(it) }
         }
     }
 }

@@ -11,13 +11,13 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import tw.idv.kailin.kotlin.cafe.di.DSModule
-import tw.idv.kailin.kotlin.cafe.di.RepoModule
-import tw.idv.kailin.kotlin.cafe.model.RepoStatus
+import tw.idv.kailin.kotlin.cafe.di.RepoViewModelModule
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepo
 import tw.idv.kailin.kotlin.cafe.repo.ds.*
 import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
-@UninstallModules(DSModule::class, RepoModule::class)
+@UninstallModules(DSModule::class, RepoViewModelModule::class)
 @HiltAndroidTest
 class CafeRepoTest {
 
@@ -44,27 +44,25 @@ class CafeRepoTest {
     @Test
     fun cafes() = runTest {
         repo.cafes.collect {
-            assertEquals(10, it.size)
-            println(it.toString())
+            assertEquals(100, it.size)
         }
     }
 
     @Test
-    fun cafesByCities() = runTest {
-        val array = arrayOf("Taipei", "Kaohsiung")
-        repo.cafes(*array).collect {
-            println(it.toString())
-            assertTrue(it.all { cafeNomad ->
-                array.contains(cafeNomad.city)
-            })
-        }
-    }
-
-    @Test
-    fun status() = runTest {
-        repo.repoState.collect {
-            assertEquals(RepoStatus.Success, it.status)
-            println(it.toString())
+    fun cafeFilter() = runTest {
+        val cities = listOf("Taipei", "Kaohsiung").toTypedArray()
+        repo.filterCafes(
+            4f, 4f, 4f, 4f, 4f, 4f, *cities
+        ).collect {
+            it.forEach { cafe ->
+                assertTrue(cafe.tasty >= 4f)
+                assertTrue(cafe.cheap >= 4f)
+                assertTrue(cafe.quiet >= 4f)
+                assertTrue(cafe.music >= 4f)
+                assertTrue(cafe.seat >= 4f)
+                assertTrue(cafe.wifi >= 4f)
+                assertTrue(cities.contains(cafe.city))
+            }
         }
     }
 }

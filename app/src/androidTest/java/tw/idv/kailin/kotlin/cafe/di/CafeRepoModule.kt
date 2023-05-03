@@ -4,11 +4,11 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepo
-import tw.idv.kailin.kotlin.cafe.repo.CafeRepoImpl
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSource
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepo
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeRepoImpl
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeApiSource
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeApiSourceFake
-import tw.idv.kailin.kotlin.cafe.repo.ds.CafeDaoSource
+import tw.idv.kailin.kotlin.cafe.repo.cafe.CafeDaoSource
 import tw.idv.kailin.kotlin.cafe.repo.ds.CafeDaoSourceFake
 import javax.inject.Singleton
 

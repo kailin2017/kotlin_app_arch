@@ -1,4 +1,4 @@
-package tw.idv.kailin.kotlin.cafe.util.connect
+package tw.idv.kailin.kotlin.cafe.util.connect.okhttp
 
 import android.annotation.SuppressLint
 import tw.idv.kailin.kotlin.cafe.BuildConfig
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import javax.net.ssl.X509TrustManager
 
-object OkHttpHelper {
+object OkHttpFactory {
 
     fun createOkHttp(vararg interceptor: Interceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
